@@ -22,12 +22,17 @@ As a short introduction, the tutorial does not claim to be comprehensive, and fo
 
 The tutorial assumes that R has been installed on your compute and that you are able to find file paths to folders (and saving files), but assumes no particular computer insight beyond that.
 
+Most of the code below will work fine irrespective of your operating system. However, there is a fundamental difference between Windows and Mac OS / Linux with respect to how file paths are formatted. On Windows, R requires two backslashes to separate folders and files, whereas on Mac OS/Linux, a single forward slash is used, as in these schematic examples:
+
+* Windows: `"C:\\Users\\yourUserName\\Documents\\thefile.txt"`
+* Mac OS: `"/Users/yourUserName/Documents/thefile.txt"`
+
 Some brief references are made to regular expressions ("regex"). No knowledge of this is assumed, and the use of regular expressions is kept to a minimum. Some background knowledge is nevertheless useful:
 
 * Regular expressions can be used to match a general pattern without knowing the exact value of the string identifed 
 * Regular expressions use some reserved characters for special purposes, notably: `. * ? ! [] () ^ $`
 * To refer to the actual character value in these cases, regex in R requires two backslashes: `\\[`
-* Regex are always enclosed in quotation marks in R
+* Regex are **always** enclosed in quotation marks in R
 * A shorthand notation can be used to refer to special characters:
     - a word character: `\\w`
     - a non-word character: `\\W`
@@ -226,6 +231,7 @@ Notes:
 
 * `dev.off()` is required to re-activate the "normal" plotting device in R.
 * Make sure to change the file path to match your computer's folder structure.
+* The file path above is for Windows. If you are using a Mac computer, your file path will look something like this: `"/Users/yourUserName/folderWithYourData/"`
 
 
 ## 1.11 Saving data
@@ -236,7 +242,7 @@ When you close the R application (either in the console or in RStudio), R will a
 
 ### Data frame
 
-Most of the time it is recommended to save your data as regular file, e.g. at .txt or .csv file. This is also a better format for sharing data.
+Most of the time it is recommended to save your data as regular file, e.g. as a .txt or .csv file. This is also a better format for sharing data.
 
 To save the data frame you created, use `write.table()`. Only two arguments are required: what to save, and where to save it.
 
@@ -256,7 +262,10 @@ write.table(affix.df, "C:\\Users\\gbj\\Documents\\kurs\\grenoble_vår_2015\\data\
 
 Compare the two output files to see the difference!
 
-Note: Make sure to change the file paths to match your computer's folder structure.
+Notes: 
+
+* Make sure to change the file paths to match your computer's folder structure.
+* The file paths above are for Windows. If you are using a Mac computer, your file path will look something like this: `"/Users/yourUserName/folderWithYourData/"`
 
 # <a name="Reading data">2 Reading data</a>
 
@@ -275,7 +284,10 @@ new.df = read.table( "C:\\Users\\gbj\\Documents\\kurs\\grenoble_vår_2015\\data\\
 
 As you can see, the syntax closely matches that of `write.table()`. `header = TRUE` specifies that the first row are to be treated as column names, and the `sep` argument tells R to divide up the data into rows and columns based on tabulators.
 
-Note: Make sure to change the file path to match your computer's folder structure.
+Notes: 
+
+* Make sure to change the file paths to match your computer's folder structure.
+* The file path above is for Windows. If you are using a Mac computer, your file path will look something like this: `"/Users/yourUserName/folderWithYourData/"`
 
 ### Some extra arguments you might need
 
@@ -292,13 +304,14 @@ In the sections below you will work with paragraphs of running, un-annotated tex
 
 The text is the beginning of the Wikipedia article on Alice in Wonderland (see Appendix). Copy the text, save it as `alice.txt`.
 
-Read the text into R using the third code example below, substituting the file path with the path to the file on your computer.
+Read the text into R using the third code example below, substituting the file path with the path to the file on your computer. If you are using a Mac computer, your file path will look something like this: `"/Users/yourUserName/folderWithYourData/"`
+
 
 ```{r}
 # not really recommended: read from computer clipboard
 # aw = scan("clipboard", what="char")
 
-# better: opens a file dialogue box
+# better: opens a file dialogue box. The Mac command for this is choose.files()
 # aw = scan(file.choose(), what="char")
 
 # recommmended: specify the file path
@@ -420,7 +433,11 @@ the.ind = grep("\\bthe\\b", aw.clean, ignore.case=T)
 head(the.ind)
 ```
 
-Note the regex pattern `\\b` for word boundary, to avoid matching "**the**n" or "**the**re".
+Notes: 
+
+* The function uses the regex pattern `\\b` for word boundary, to avoid matching "**the**n" or "**the**re"
+* The `grep()` function is an R implementation of a search tool that is also found outside R. Do a web search for "grep Mac" or "grep Windows" depending on your operating system.
+
 
 With the index position information, we can identify all the instances of "the" using subsetting:
 
@@ -438,7 +455,9 @@ head(aw.conc)
 
 ### Excerise 1
 
-Modify the code above to create a concordance list for "Alice".
+Modify the code above to create a concordance list for "and".
+
+Note: If the key word occurs at the beginning or end of sentence, slightly more sophisticated code is required to make it work. See e.g. Gries 2009 on writing for-loops.
 
 ### Excerise 2
 
