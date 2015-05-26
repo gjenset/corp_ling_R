@@ -1,0 +1,72 @@
+---
+title: "Corpus Linguistics with R"
+author: "Gard Jenset"
+date: "Tuesday, May 26, 2015"
+output: html_document
+---
+
+
+# Reading data
+
+```
+aw = scan("clipboard", what="char")
+```
+## Summarize data
+
+```
+length(aw)
+```
+
+## Inspect beginning and end
+
+```
+# first 6 words
+aw[1:6]
+
+```
+
+Using `head` and `tail` are alternatives:
+
+```
+# first 6 words
+head(aw)
+
+# last 6 words
+tail(aw)
+```
+
+Showing the first 10 words with `head`
+
+```
+head(aw, n = 10)
+```
+
+
+
+
+
+# Basic corpus linguistics
+
+## A sorted word-frequency list
+
+## A simple concordance list
+
+## A frequency list of word-pairs
+
+
+
+
+# Processing text
+
+## Find sentence lengths
+
+## Find sentences containing "and"
+
+## Explore results with plots
+
+## Find sentences with parentheses
+
+## Create cross-tables
+
+## Visualize results
+
